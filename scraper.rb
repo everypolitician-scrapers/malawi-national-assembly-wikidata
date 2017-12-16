@@ -9,4 +9,7 @@ names = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: '//table[tr[th[.="Party"]]]//td[1]//a[not(@class="new")]/@title',
 )
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { en: names })
+sparq = 'SELECT DISTINCT ?item WHERE { ?item p:P39 [ ps:P39 wd:Q21295990 ; pq:P2937 wd:Q45767574 ] }'
+ids = EveryPolitician::Wikidata.sparql(sparq)
+
+EveryPolitician::Wikidata.scrape_wikidata(ids: ids, names: { en: names })
